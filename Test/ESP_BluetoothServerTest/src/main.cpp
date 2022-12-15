@@ -98,10 +98,28 @@ void loop()
   if( 1 == ub_DeviceConnected )
   {
     /* If we waited an arbitrary time */
-    if( (millis() - uw_LastTime ) > uw_TimerDelay )
+    if( ( millis() - uw_LastTime ) > uw_TimerDelay )
     {
       /* Update the TurnCommand */
       ub_TurnCommand += 1;
+
+      /* Before setting the TurnCommand characteristics value, we need to convert the
+      uint8_t value to a string/(or char??), because the .setValue function expects it */
+      /* I HAVE NOT USED THIS, BECAUSE I TRIED TO GIVE uint8_t POINTER AS PARAMETER */
+      unsigned char uc_TurnCommandChar = ( unsigned char ) ub_TurnCommand;
+
+      /* Set the value for the TurnCommand characteristics */
+      /* NOT SHURE THIS WORKS THIS WAY */
+      TurnCommandCharacteristics.setValue( &ub_TurnCommand, 1 );
+
+      /* Notify the connected client that the TurnCommand value changed */
+      TurnCommandCharacteristics.notify();
+
+      /* Print some debug data */
+      #ifdef DEBUG_ON
+      Serial.printf( "The new TurnCommand value: %d", ub_TurnCommand );
+      #endif
+
     }
     else
     {
@@ -112,6 +130,8 @@ void loop()
   {
     /* do nothing */
   }
+  
+
 }
 
 /*******************************************************************************************************************************/
