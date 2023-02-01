@@ -81,7 +81,7 @@ void setup()
   /* Start the service */
   p_Service->start();
 
-  /* Start adcertising so other devices can find it */
+  /* Start advertising so other devices can find it */
   BLEAdvertising *p_Advertising = BLEDevice::getAdvertising();
   p_Advertising->addServiceUUID( ac_SERVICE_UUID );
   p_Server->getAdvertising()->start();
@@ -101,7 +101,7 @@ void loop()
     if( ( millis() - uw_LastTime ) > uw_TimerDelay )
     {
       /* Update the TurnCommand */
-      ub_TurnCommand += 1;
+      ub_TurnCommand = 0xA1;
 
       /* Before setting the TurnCommand characteristics value, we need to convert the
       uint8_t value to a string/(or char??), because the .setValue function expects it */
