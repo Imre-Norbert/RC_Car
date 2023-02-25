@@ -3,9 +3,9 @@
 
 #include <Arduino.h>
 #include <BLEDevice.h>
-//#include <BLEUtils.h>
+#include <BLEUtils.h>
 //#include <BLEServer.h>
-//#include <BLE2902.h>
+#include <BLE2902.h>
 
 /*******************************************************************************************************************************/
 /*************************************** D E F I N E S *************************************************************************/
@@ -74,7 +74,7 @@ class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks
             pServerAddress = new BLEAddress( advertisedDevice.getAddress() );
             
             /* We are ready to connect */
-            uint8_t ub_doConnect = 1; 
+            ub_doConnect = 1; 
         
             /* Print some debug data */
             #ifdef DEBUG_ON
@@ -105,7 +105,7 @@ void setup()
     pBLEScan->setAdvertisedDeviceCallbacks( new MyAdvertisedDeviceCallbacks() );
     /* Specify that we want active stanning */
     pBLEScan->setActiveScan( true );
-    /* Specify the scanning time in minutes */
+    /* Specify the scanning time in seconds */
     pBLEScan->start( 30 );
 }
 
