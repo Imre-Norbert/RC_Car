@@ -4,8 +4,10 @@
 #include <Arduino.h>
 #include <BLEDevice.h>
 #include <BLEUtils.h>
-//#include <BLEServer.h>
 #include <BLE2902.h>
+
+//This is enough instead of Arduino.h
+//#include "HardwareSerial.h"
 
 /*******************************************************************************************************************************/
 /*************************************** D E F I N E S *************************************************************************/
